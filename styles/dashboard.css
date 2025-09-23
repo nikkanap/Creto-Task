@@ -1,4 +1,9 @@
-body{
+html, body {
+    width: 98vw;
+    height: 85vh;
+}
+
+body {
     background-color: rgb(38, 52, 69);
     color: white;
     font-family: Arial, Helvetica, sans-serif;
@@ -10,28 +15,68 @@ hr {
 }
 
 td {
+    text-align: left;
     cursor: pointer;
+    padding: 10px;
+}
+
+td:hover {
+    background-color: rgb(64, 80, 99);
+}
+
+.current-day {
+    background-color: green;
+}
+
+/*logo title*/
+.logo-title {
+    font-weight: bold;
+    font-size: 25px;
+    text-align: center;
+    margin: 15px;
+    margin-bottom: 50px;
+}
+
+.month {
+    position: fixed;
+    top: 40px;
+    left: 5%;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.username {
+    position: fixed;
+    top: 40px;
+    right: 5%;
+}
+
+.calendar {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    table-layout: fixed;
 }
 
 /*overlay containing the journal portion*/
 .overlay-div {
     align-content: center;
-    display: none;
-    border: none;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /*translates position*/
     width: 700px;
     height: 90%;
-    z-index: 99999;
-    border-radius: 20px;
+    border: none;
     background-color: rgb(38, 52, 69);
+    border-radius: 20px;
+    z-index: 999;
+    display: none;
 }
 
 /*displaying the overlay*/
 .display-content {
-    display: initial;
+    display: block !important;
 }
 
 /* */
@@ -93,12 +138,13 @@ td {
 
 /*background fade*/
 .background-fade {
-    display: none;
-    opacity: 0.8;
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.8;
     z-index: 99;
+    background-color: black;
+    display: none;
 }
