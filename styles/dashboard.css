@@ -1,0 +1,103 @@
+body{
+    background-color: rgb(38, 52, 69);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+hr {
+    width: 95%;
+    margin: 10px 15px;
+}
+
+/*overlay containing the journal portion*/
+.overlay-div {
+    opacity: 0;
+    border: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /*translates position*/
+    width: 700px;
+    height: 90%;
+    z-index: 99999;
+    border-radius: 20px;
+    background-color: rgb(38, 52, 69);
+}
+
+/*displaying the overlay*/
+.display-overlay {
+    opacity: 1;
+}
+
+/* */
+.journal-date {
+    margin-left: 15px;
+}
+
+.journal-close-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    border: none;
+    color: white;
+    margin: 15px;
+    cursor: pointer;
+}
+
+.portion {
+    align-content: center;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(64, 80, 99);
+    margin: 15px;
+    height: 40%;
+}
+
+.portion-title {
+    margin-left: 15px;
+    display: block;
+    margin-bottom: 0;
+}
+
+/*the journal entry portion*/
+.journal-entry-portion {
+    
+}
+
+.journal-entry-div {
+    height: 100%;
+}
+
+.journal-entry-field {
+    width: 95%;
+    height: 70%;
+    margin: auto;
+    display: block;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(64, 80, 99);
+    color: white;
+    resize: none;
+    border: none;
+}
+
+/*the checklist portion*/
+.checklist-portion {
+
+}
+
+/*background fade*/
+.background-fade {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background-color: black;
+}
+
+.display-fade {
+    opacity: 0.8;
+}
