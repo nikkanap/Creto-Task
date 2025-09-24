@@ -3,6 +3,7 @@
     <head>
         <title>Creto Task - Dashboard</title>
         <link rel="stylesheet" href="styles/dashboard.css">
+        <link rel="stylesheet" href="styles/sharedelements.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -16,8 +17,7 @@
         <div class="background-fade js-background-fade"></div>
 
         <!--Setting up the daily quota-->
-        </div>
-        <div class="daily-quota-div js-daily-quota-div">
+        <div class="overlay daily-quota-div js-daily-quota-div">
             <p class="logo-title">Creto Task</p>
             <div class="description">
                 <p class="inner-description">
@@ -39,10 +39,9 @@
             <button class="button js-proceed">PROCEED</button>
         </div>
 
-
         <!--Journal Logs-->
         </div>
-        <div class="overlay-div js-overlay-div">
+        <div class="overlay overlay-div js-overlay-div">
             <button class="journal-close-button js-journal-close-button">X</button>
             <p class="journal-date js-journal-date"></p>
             

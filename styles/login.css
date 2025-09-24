@@ -2,10 +2,6 @@ td {
     padding-bottom: 10px;
 }
 
-.description {
-    margin-bottom: 20px;
-}
-
 .container {
     background-color: rgb(38, 52, 69);
 }
@@ -15,13 +11,6 @@ td {
     display: block;
     width: fit-content;
     margin: auto;
-}
-
-.input-field {
-    display: inline;
-    width: 200px;
-    height: 15px;
-    padding: 5px;
 }
 
 .button-cell {

@@ -1,0 +1,15 @@
+body{
+    background-color: rgb(23, 31, 41);;
+    color: white;
+    font-family: 'Montserrat';
+}
+
+.bg-image {
+    background-image: url("../images/background.png");
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0.2;
+}

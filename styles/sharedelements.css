@@ -1,19 +1,3 @@
-body{
-    background-color: rgb(23, 31, 41);;
-    color: white;
-    font-family: 'Montserrat';
-}
-
-.bg-image {
-    background-image: url("../images/background.png");
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    opacity: 0.2;
-}
-
 .container {
     text-align: center;
     align-content: center;
@@ -31,7 +15,12 @@ body{
 .logo-title {
     font-weight: bold;
     font-size: 40px;
+    text-align: center;
     margin: 15px;
+}
+
+.description {
+    margin-bottom: 20px;
 }
 
 .inner-description {
@@ -51,4 +40,11 @@ body{
 
 .button:hover {
     background-color: rgb(86, 104, 125);
+}
+
+.input-field {
+    display: inline;
+    width: 200px;
+    height: 15px;
+    padding: 5px;
 }
