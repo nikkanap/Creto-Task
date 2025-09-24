@@ -24,7 +24,7 @@ td:hover {
     background-color: rgb(64, 80, 99);
 }
 
-.current-day {
+.today {
     background-color: green;
 }
 
@@ -56,6 +56,14 @@ td:hover {
     height: 100%;
     text-align: center;
     table-layout: fixed;
+}
+
+.table-header {
+    border: 1px solid white;
+}
+
+.cell-date {
+    margin: 0;
 }
 
 /*overlay containing the journal portion*/
