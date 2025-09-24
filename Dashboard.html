@@ -3,7 +3,7 @@
     <head>
         <title>Creto Task - Dashboard</title>
         <link rel="stylesheet" href="styles/dashboard.css">
-        <link rel="stylesheet" href="styles/sharedelements.css">
+        <link rel="stylesheet" href="styles/shared-elements.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -16,7 +16,7 @@
         <!--background fade for overlay elements-->
         <div class="background-fade js-background-fade"></div>
 
-        <!--Setting up the daily quota-->
+        <!--Daily Quota Overlay-->
         <div class="overlay daily-quota-div js-daily-quota-div">
             <p class="logo-title">Creto Task</p>
             <div class="description">
@@ -39,7 +39,8 @@
             <button class="button js-proceed">PROCEED</button>
         </div>
 
-        <!--Journal Logs-->
+
+        <!--Journal Log Overlay-->
         </div>
         <div class="overlay overlay-div js-overlay-div">
             <button class="journal-close-button js-journal-close-button">X</button>
@@ -60,6 +61,37 @@
                     <textarea class="journal-entry-field" placeholder="Enter a log..."></textarea>
                 </div>
             </div> 
+        </div>
+
+        <!--Account Settings Overlay-->
+        <div class="account-settings-overlay js-account-settings-overlay">
+            <p>Account Settings</p>
+            <hr>
+            <p>User Information</p>
+            <table class="user-information">
+                <tr>
+                    <td>Username</td>
+                    <td>Nio Dilao</td>
+                </tr>
+                <tr>
+                    <td>Email Address</td>
+                    <td>emailAddress@gmail.com</td>
+                </tr>
+                <tr>
+                    <td>Date Joined</td>
+                    <td>December 1, 2024</td>
+                </tr>
+                <tr>
+                    <td>Daily Task Quota</td>
+                    <td>5 tasks per day</td>
+                </tr>
+            </table>
+            <hr>
+            <p class="clickable-setting js-change-quota">Change Daily Quota</p>
+            <p class="clickable-setting js-change-username">Change Username</p>
+            <p class="clickable-setting js-change-password">Change Password</p>
+            <p class="clickable-setting js-delete-account">Delete Account</p>
+            <p class="clickable-setting js-log-out">Log Out</p>
         </div>
         <script type="module" src="scripts/dashboard.js"></script>
     </body>

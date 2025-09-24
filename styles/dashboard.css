@@ -22,7 +22,7 @@ th {
     border: 1px solid white;
 }
 
-hr {
+.overlay-div hr {
     width: 90%;
     margin: 10px 30px;
     display: inline-block;
@@ -158,8 +158,6 @@ hr {
     border: none;
 }
 
-/*the checklist portion*/
-
 /*background fade*/
 .background-fade {
     position: absolute;
@@ -171,5 +169,36 @@ hr {
     z-index: 99;
     background-color: black;
     display: none;
+}
+
+.account-settings-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100vh;
+    border: none;
+    background-color: black;
+    z-index: 999;
+    padding: 20px;
+    display: none;
+}
+
+.account-settings-overlay p {
+    margin: auto;
+}
+
+.user-information {
+    table-layout: fixed;
+    font-size: 12px;
+}
+
+.clickable-setting {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.clickable-setting:hover {
+    background-color: rgb(64, 80, 99);
 }
 

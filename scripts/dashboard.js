@@ -5,21 +5,23 @@ function renderDashboard() {
     document.querySelector('.js-month').innerHTML = `${month} - ${year}`;
     
     document.querySelector('.js-username')
-    .addEventListener('click', () => {
-        window.location.href="User.html";
+    .addEventListener('click', (event) => {
+        event.stopPropagation(); // stops the event from propagating
+        openAccountSettingsOverlay();
     });
-    
+
+    document.querySelector('.js-log-out')
+    .addEventListener('click', () => {
+        window.location.href = "Home.html";
+    });
+
     // rendering the calendar (html)
     let calendarHTML = '';
     // weekdates
     const weekdates = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     calendarHTML += '<tr>'
     weekdates.forEach((date) => {
-        calendarHTML += `
-            <th>
-                ${date}
-            </th>
-        `;
+        calendarHTML += `<th> ${date}</th>`;
     });
     calendarHTML += '</tr>'
     
@@ -44,7 +46,6 @@ function renderDashboard() {
         }
         calendarHTML += '</tr>';
     }
-    console.log(calendarHTML);
     document.querySelector('.js-calendar').innerHTML = calendarHTML;
 
     document.querySelectorAll('td').forEach((dayCell) => {
@@ -84,37 +85,36 @@ function renderDashboard() {
         document.querySelector('.js-proceed')
         .addEventListener('click', () => closeQuotaOverlay());
     }
+
+    const overlay = document.querySelector('.js-account-settings-overlay');
+    document.addEventListener('click', (event) => {
+        if(overlay.classList.contains('display-content') && !overlay.contains(event.target)) {
+            closeAccountSettingsOverlay();
+        }
+    });
 }
 renderDashboard();
 
 function openJournalOverlay() {
-    const backgroundFade = document.querySelector('.js-background-fade');
-    backgroundFade.classList.add('display-content');
-
+    openFade();
     const overlayDiv = document.querySelector('.js-overlay-div');
     overlayDiv.classList.add('display-content');
 }
 
 function closeJournalOverlay() {
-    const backgroundFade = document.querySelector('.js-background-fade');
-    backgroundFade.classList.remove('display-content');
-
+    closeFade();
     const overlayDiv = document.querySelector('.js-overlay-div');
     overlayDiv.classList.remove('display-content');
 }
 
 function openQuotaOverlay() {
-    const backgroundFade = document.querySelector('.js-background-fade');
-    backgroundFade.classList.add('display-content');
-
+    openFade();
     const overlayDiv = document.querySelector('.js-daily-quota-div');
     overlayDiv.classList.add('display-content');
 }
 
 function closeQuotaOverlay() {
-    const backgroundFade = document.querySelector('.js-background-fade');
-    backgroundFade.classList.remove('display-content');
-
+    closeFade();
     const overlayDiv = document.querySelector('.js-daily-quota-div');
     overlayDiv.classList.remove('display-content');
 
@@ -122,6 +122,27 @@ function closeQuotaOverlay() {
     history.replaceState({}, '', 'Dashboard.html');
 }
 
+function openAccountSettingsOverlay() {
+    openFade();
+    const overlayDiv = document.querySelector('.js-account-settings-overlay');
+    overlayDiv.classList.add('display-content');
+}
+
+function closeAccountSettingsOverlay() {
+    closeFade();
+    const overlayDiv = document.querySelector('.js-account-settings-overlay');
+    overlayDiv.classList.remove('display-content');
+}
+
+function closeFade() {
+    const backgroundFade = document.querySelector('.js-background-fade');
+    backgroundFade.classList.remove('display-content');
+}
+
+function openFade() {
+    const backgroundFade = document.querySelector('.js-background-fade');
+    backgroundFade.classList.add('display-content');
+}
 
 
 
