@@ -23,19 +23,18 @@ function renderDashboard() {
     for(let i = 1; i <= 5; i++) {
         calendarHTML += '<tr>';
         for(let j = 0; j < 7; j++){
-            // we have to start from 1 to arrange things
             if(getDayOfTheWeekNumber(day, month, year) != j){
                 calendarHTML += '<td></td>';
-            } else {
-                calendarHTML += `
-                <td class="
-                    ${(day === Number(date)) ? 'today js-today' : ''}
-                    ${(day < Number(date)) ? 'js-previous-days' : ''}
-                " data-day="${day}">
-                    ${(day > getNoOfDaysInAMonth(month, year)) ? '' : `${day} <br> Tasks Finished: N/A`}
-                </td>`;
-                day++;
-            }
+                continue;
+            } 
+            calendarHTML += `
+            <td class="
+                ${(day === Number(date)) ? 'today js-today' : ''}
+                ${(day < Number(date)) ? 'js-previous-days' : ''}
+            " data-day="${day}">
+                ${(day > getNoOfDaysInAMonth(month, year)) ? '' : `${day} <br> Tasks Finished: N/A`}
+            </td>`;
+            day++;
         }
         calendarHTML += '</tr>';
     }
@@ -50,21 +49,23 @@ function renderDashboard() {
             }
 
             dayCell.classList.add('selected');
-            openOverlays();
             document.querySelector('.journal-entry-field')
             .readOnly = (dayCell.classList.contains('js-today')) ? false : true;
 
             const { day } = dayCell.dataset;
-            renderJournalEntry(day, month, year);
+            let dateWithWeek = getFullDate(month, day, year);
+            if(dayCell.classList.contains('js-today')) {
+                dateWithWeek += ' (Today)';
+            }
+            document.querySelector('.js-journal-date').innerHTML = dateWithWeek;
+            openOverlays();
         });
     });
 
     // ---- journal portion functionalities ----
     // close button functionality
     const closeButton = document.querySelector('.js-journal-close-button');
-    closeButton.addEventListener('click', () => {
-        closeOverlays();
-    });
+    closeButton.addEventListener('click', () => closeOverlays());
 }
 renderDashboard();
 
@@ -82,11 +83,6 @@ function closeOverlays() {
 
     const overlayDiv = document.querySelector('.js-overlay-div');
     overlayDiv.classList.remove('display-content');
-}
-
-function renderJournalEntry(day, month, year) {
-    let dateWithWeek = getFullDate(month, day, year);
-    document.querySelector('.js-journal-date').innerHTML = dateWithWeek;
 }
 
 
