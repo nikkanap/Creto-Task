@@ -16,7 +16,7 @@ function renderDashboard() {
     calendarHTML += '<tr>'
     weekdates.forEach((date) => {
         calendarHTML += `
-            <th class="table-header">
+            <th>
                 ${date}
             </th>
         `;
@@ -75,11 +75,7 @@ function renderDashboard() {
     // open the daily quota nav if from signup
     const params = new URLSearchParams(window.location.search);
     if(params.get('from') === 'signup'){
-        const backgroundFade = document.querySelector('.js-background-fade');
-        backgroundFade.classList.add('display-content');
-
-        const overlayDiv = document.querySelector('.js-daily-quota-div');
-        overlayDiv.classList.add('display-content');
+        openQuotaOverlay();
 
         document.querySelector('.js-set-to-default')
         .addEventListener('click', () => closeQuotaOverlay());
@@ -120,6 +116,9 @@ function closeQuotaOverlay() {
 
     const overlayDiv = document.querySelector('.js-daily-quota-div');
     overlayDiv.classList.remove('display-content');
+
+    // changes the state of the URL
+    history.replaceState({}, '', 'Dashboard.html');
 }
 
 
