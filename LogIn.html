@@ -3,19 +3,48 @@
     <head>
         <title>Creto Task - Log In</title>
         <link rel="stylesheet" href="styles/login.css">
+        <link rel="stylesheet" href="styles/sharedelements.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     </head>
     <body>
-        <p class="title">Creto Task</p>
-        <p class="description">Create journal entries and fulfill your tasks at the same time.</p> 
-        <fieldset>
-            <label for="username">Username</label>
-            <input type="text" name="username">
-            <br>
-            <label for="password">Password</label>
-            <input type="password" name="password">
-        </fieldset>
-        <button class="js-log-in-button">LOG IN</button>
-        
+        <div class="bg-image"></div>
+        <div class="container">
+            <p class="logo-title">Creto Task</p>
+            <div class="description">
+                <p class="inner-description">
+                    Create journal entries and fulfill your tasks
+                </p> 
+                <p class="inner-description">
+                    at the same time using Creto Task.
+                </p> 
+            </div>
+            
+            <table class="input-container">
+                <tr>
+                    <td>
+                        <label for="username">Username</label>
+                    </td>
+                    <td>
+                        <input class="input-field" type="text" name="username" placeholder="Enter your username">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="password">Password</label>
+                    </td>
+                    <td>
+                        <input class="input-field" type="password" name="password" placeholder="Enter your password">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="button-cell">
+                        <button class="log-in-button js-log-in-button">LOG IN</button>
+                    </td>
+                </tr>
+            </table>
+            <a class="to-sign-up" href="SignUp.html">Don't have an account yet? Sign up</a>
+        </div>        
         <script type="module" src="scripts/login.js"></script>
     </body>
 </html>

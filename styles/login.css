@@ -1,0 +1,45 @@
+td {
+    padding-bottom: 10px;
+}
+
+.description {
+    margin-bottom: 20px;
+}
+
+.container {
+    background-color: rgb(38, 52, 69);
+    padding: 20px;
+}
+
+.input-container {
+    align-content: center;
+    display: block;
+    width: fit-content;
+    margin: auto;
+}
+
+.input-field {
+    display: inline;
+    width: 200px;
+    height: 15px;
+    padding: 5px;
+}
+
+.button-cell {
+    text-align: right;
+}
+
+.log-in-button {
+    width: 100px;
+}
+
+.to-sign-up {
+    color:  rgb(174, 186, 202);
+    text-decoration: none;
+    font-size: 10px;
+    font-style: italic;
+}
+
+.to-sign-up:hover {
+    color: rgb(209, 216, 226);
+}
