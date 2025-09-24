@@ -8,7 +8,6 @@ td {
 
 .container {
     background-color: rgb(38, 52, 69);
-    padding: 20px;
 }
 
 .input-container {
@@ -29,7 +28,7 @@ td {
     text-align: right;
 }
 
-.sign-up-button {
+.button {
     width: 100px;
 }
 

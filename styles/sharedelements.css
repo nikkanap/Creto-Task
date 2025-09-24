@@ -25,6 +25,7 @@ body{
     height: fit-content;
     border: none;
     border-radius: 10px;
+    padding: 20px;
 }
 
 .logo-title {
@@ -37,7 +38,7 @@ body{
     margin: auto;
 }
 
-.log-in-button, .sign-up-button {
+.button {
     font-family: 'Montserrat';
     background-color: rgb(64, 80, 99);
     color: white;
@@ -48,6 +49,6 @@ body{
     cursor: pointer;
 }
 
-.log-in-button:hover, .sign-up-button:hover {
+.button:hover {
     background-color: rgb(86, 104, 125);
 }

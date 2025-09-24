@@ -88,6 +88,65 @@ td:hover, .journal-close-button:hover {
     display: none;
 }
 
+.daily-quota-div {
+    text-align: center;
+    align-content: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /*translates position*/
+    width: fit-content;
+    height: fit-content;
+    border: none;
+    border-radius: 10px;
+    z-index: 999;
+    background-color: rgb(38, 52, 69);
+    padding: 20px;
+    display: none;
+}
+
+.logo-title {
+    font-weight: bold;
+    font-size: 30px;
+    margin: 15px;
+}
+
+.description {
+    margin-bottom: 20px;
+}
+
+.inner-description {
+    margin: auto;
+}
+
+.small-inner-description {
+    font-style: italic;
+    font-size: 10px;
+}
+
+.input-field {
+    display: inline;
+    width: 200px;
+    height: 15px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.button {
+    font-family: 'Montserrat';
+    background-color: rgb(64, 80, 99);
+    color: white;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgb(86, 104, 125);
+}
+
 /*displaying the overlay*/
 .display-content {
     display: block !important;

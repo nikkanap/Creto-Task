@@ -63,18 +63,34 @@ function renderDashboard() {
                 dateWithWeek += ' (Today)';
             }
             document.querySelector('.js-journal-date').innerHTML = dateWithWeek;
-            openOverlays();
+            openJournalOverlay();
         });
     });
 
     // ---- journal portion functionalities ----
     // close button functionality
     const closeButton = document.querySelector('.js-journal-close-button');
-    closeButton.addEventListener('click', () => closeOverlays());
+    closeButton.addEventListener('click', () => closeJournalOverlay());
+
+    // open the daily quota nav if from signup
+    const params = new URLSearchParams(window.location.search);
+    if(params.get('from') === 'signup'){
+        const backgroundFade = document.querySelector('.js-background-fade');
+        backgroundFade.classList.add('display-content');
+
+        const overlayDiv = document.querySelector('.js-daily-quota-div');
+        overlayDiv.classList.add('display-content');
+
+        document.querySelector('.js-set-to-default')
+        .addEventListener('click', () => closeQuotaOverlay());
+
+        document.querySelector('.js-proceed')
+        .addEventListener('click', () => closeQuotaOverlay());
+    }
 }
 renderDashboard();
 
-function openOverlays() {
+function openJournalOverlay() {
     const backgroundFade = document.querySelector('.js-background-fade');
     backgroundFade.classList.add('display-content');
 
@@ -82,11 +98,27 @@ function openOverlays() {
     overlayDiv.classList.add('display-content');
 }
 
-function closeOverlays() {
+function closeJournalOverlay() {
     const backgroundFade = document.querySelector('.js-background-fade');
     backgroundFade.classList.remove('display-content');
 
     const overlayDiv = document.querySelector('.js-overlay-div');
+    overlayDiv.classList.remove('display-content');
+}
+
+function openQuotaOverlay() {
+    const backgroundFade = document.querySelector('.js-background-fade');
+    backgroundFade.classList.add('display-content');
+
+    const overlayDiv = document.querySelector('.js-daily-quota-div');
+    overlayDiv.classList.add('display-content');
+}
+
+function closeQuotaOverlay() {
+    const backgroundFade = document.querySelector('.js-background-fade');
+    backgroundFade.classList.remove('display-content');
+
+    const overlayDiv = document.querySelector('.js-daily-quota-div');
     overlayDiv.classList.remove('display-content');
 }
 
