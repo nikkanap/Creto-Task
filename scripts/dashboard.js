@@ -28,12 +28,13 @@ function renderDashboard() {
     for(let i = 1; i <= 5; i++) {
         calendarHTML += '<tr>';
         for(let j = 0; j < 7; j++){
-            if(getDayOfTheWeekNumber(day, month, year) != j){
+            if(getDayOfTheWeekNumber(day, month, year) != j || day > getNoOfDaysInAMonth(month, year)){
                 calendarHTML += '<td></td>';
                 continue;
             } 
             calendarHTML += `
             <td class="
+                filled-cell
                 ${(day === Number(date)) ? 'today js-today' : ''}
                 ${(day < Number(date)) ? 'js-previous-days' : ''}
             " data-day="${day}">

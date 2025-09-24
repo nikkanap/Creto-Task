@@ -9,7 +9,7 @@ body {
     font-family: 'Montserrat';
 }
 
-td {
+.filled-cell {
     font-size: 15px;
     text-align: left;
     cursor: pointer;
@@ -23,11 +23,12 @@ th {
 }
 
 hr {
-    width: 95%;
-    margin: 10px 15px;
+    width: 90%;
+    margin: 10px 30px;
+    display: inline-block;
 }
 
-td:hover, .journal-close-button:hover {
+.filled-cell:hover, .journal-close-button:hover {
     background-color: rgb(64, 80, 99);
 }
 
@@ -156,7 +157,7 @@ td:hover, .journal-close-button:hover {
 
 /* */
 .journal-date {
-    margin-left: 15px;
+    margin-left: 40px;
 }
 
 .journal-close-button {
@@ -176,12 +177,14 @@ td:hover, .journal-close-button:hover {
     border: none;
     border-radius: 10px;
     background-color: rgb(64, 80, 99);
-    margin: 15px;
+    width: 90%;
     height: 40%;
+    margin: auto;
+    margin-bottom: 20px;
 }
 
 .portion-title {
-    margin-left: 15px;
+    margin-left: 30px;
     display: block;
     margin-bottom: 0;
 }
@@ -192,7 +195,7 @@ td:hover, .journal-close-button:hover {
 }
 
 .journal-entry-field {
-    width: 95%;
+    width: 90%;
     height: 70%;
     margin: auto;
     display: block;
