@@ -4,6 +4,11 @@ function renderDashboard() {
     let { month, date, year } = getCurrentDate();
     document.querySelector('.js-month').innerHTML = `${month} - ${year}`;
     
+    document.querySelector('.js-username')
+    .addEventListener('click', () => {
+        window.location.href="User.html";
+    });
+    
     // rendering the calendar (html)
     let calendarHTML = '';
     // weekdates
@@ -84,6 +89,8 @@ function closeOverlays() {
     const overlayDiv = document.querySelector('.js-overlay-div');
     overlayDiv.classList.remove('display-content');
 }
+
+
 
 
 
