@@ -100,4 +100,9 @@ export function saveDailyQuota(username, dailyQuota) {
     saveToLocalStorage();
 }
 
+export function getUserId(username) {
+    const user = getUser(username);
+    return user.userId;
+}
+
 
