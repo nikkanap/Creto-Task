@@ -3,15 +3,20 @@ import { users, userExists, validateLogin } from "./data/user-data.js";
 const logInButton = document.querySelector('.js-log-in-button');
 logInButton.addEventListener('click', () => {
     const username = document.querySelector('.username').value;
+    const password = document.querySelector('.password').value;
+    if(username.length === 0 || password.length === 0){
+        displayInvalidLoginElement('Please fill in all the blanks.');
+        return;
+    }
 
     const doesUserExist = userExists(username);
     if(!doesUserExist) {
-        console.log('No user exists with that username.');
+        displayInvalidLoginElement('Invalid Login.');
         return;
     } 
     console.log(`${username} exists!`);
 
-    const password = document.querySelector('.password').value;
+    
     const validLogIn = validateLogin(username, password);
 
     if(validLogIn){
@@ -19,5 +24,11 @@ logInButton.addEventListener('click', () => {
         window.location.href = "Dashboard.html";
         return;
     }
-    console.log(`Invalid Login!`);
+    displayInvalidLoginElement('Invalid Login.');
 });
+
+function displayInvalidLoginElement(content) {
+    const invalidLoginElement = document.querySelector('.js-invalid-login');
+    invalidLoginElement.innerHTML = content;
+    invalidLoginElement.classList.add('display-content');
+}

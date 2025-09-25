@@ -48,3 +48,8 @@
     height: 15px;
     padding: 5px;
 }
+
+/*displaying the overlay*/
+.display-content {
+    display: block !important;
+}

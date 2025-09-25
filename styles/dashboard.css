@@ -102,11 +102,6 @@ th {
     margin-bottom: 20px;
 }
 
-/*displaying the overlay*/
-.display-content {
-    display: block !important;
-}
-
 /* */
 .journal-date {
     margin-left: 40px;
