@@ -23,8 +23,8 @@ th {
 }
 
 .overlay-div hr {
-    width: 90%;
-    margin: 10px 30px;
+    width: 94%;
+    margin: 10px 20px;
     display: inline-block;
 }
 
@@ -84,8 +84,10 @@ th {
 .overlay-div {
     width: 700px;
     height: 90%;
+    padding: 10px;
 }
 
+/*Daily Quota elements*/
 .daily-quota-div {
     text-align: center;
     width: fit-content;
@@ -102,9 +104,14 @@ th {
     margin-bottom: 10px;
 }
 
-/* */
+.invalid-input {
+    text-align: center;
+    margin: auto;
+}
+
+/* Journal Overlay elements */
 .journal-date {
-    margin-left: 40px;
+    margin-left: 15px;
 }
 
 .journal-close-button {
@@ -124,14 +131,14 @@ th {
     border: none;
     border-radius: 10px;
     background-color: rgb(64, 80, 99);
-    width: 90%;
-    height: 40%;
+    width: 97%;
+    height: 44%;
     margin: auto;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .portion-title {
-    margin-left: 30px;
+    margin-left: 20px;
     display: block;
     margin-bottom: 0;
 }
@@ -142,7 +149,7 @@ th {
 }
 
 .journal-entry-field {
-    width: 90%;
+    width: 94%;
     height: 70%;
     margin: auto;
     display: block;
@@ -153,7 +160,7 @@ th {
     border: none;
 }
 
-/*background fade*/
+/* background fade */
 .background-fade {
     position: absolute;
     top: 0;
@@ -166,6 +173,7 @@ th {
     display: none;
 }
 
+/*Account Settings elements*/
 .account-settings-overlay {
     position: fixed;
     top: 0;
@@ -197,11 +205,7 @@ th {
     background-color: rgb(64, 80, 99);
 }
 
-.invalid-input {
-    text-align: center;
-    margin: auto;
-}
-
+/*within shared-elements.css*/
 .button {
     font-size: 12px;
 }
