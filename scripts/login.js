@@ -1,10 +1,10 @@
-import { users, userExists, validateLogin } from "./data/user-data.js";
+import { userExists, validateLogin } from "./data/user-data.js";
 
 let timeout;
 const logInButton = document.querySelector('.js-log-in-button');
 logInButton.addEventListener('click', () => {
-    const username = document.querySelector('.username').value;
-    const password = document.querySelector('.password').value;
+    const username = document.querySelector('.js-username').value;
+    const password = document.querySelector('.js-password').value;
     if(username.length === 0 || password.length === 0){
         displayInvalidLoginElement('Please fill in all the blanks.');
         return;

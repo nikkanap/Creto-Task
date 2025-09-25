@@ -42,3 +42,13 @@ td {
 .to-log-in:hover {
     color: rgb(209, 216, 226);
 }
+
+.invalid-signup {
+    font-size: 10px;
+    font-style: italic;
+    color: rgb(255, 0, 0);
+    opacity: 0.8;
+    margin: auto;
+    display: none;
+    text-align: right;
+}
