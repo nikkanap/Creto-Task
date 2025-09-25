@@ -9,6 +9,7 @@ export function loadTasksToOverlay(isToday, shortFullDate) {
 
     let tasksHTML = '';
     const tasks = getUserTasks(userId);
+    
     tasks.forEach((task) => {
         if(task.archived === true){
             return;
@@ -18,12 +19,15 @@ export function loadTasksToOverlay(isToday, shortFullDate) {
             if(task.completed === true && shortFullDate != task.dateCompleted){
                 return;
             }
+
+            document.querySelector('.js-portion-add-task').classList.add('add-task-clickable');
         } else {
             if(task.completed === false || shortFullDate != task.dateCompleted){
                 return;
             } 
+            document.querySelector('.js-portion-add-task').classList.remove('add-task-clickable');
         }
-        
+
         tasksHTML += `
             <div class="task">
                 <input class="task-button checkbox-input" type="checkbox" name="checklist" value="checklist" id="1" ${(!isToday) ? 'onclick="return false"': ''} ${(task.completed) ? 'checked' : ''}>
@@ -33,8 +37,16 @@ export function loadTasksToOverlay(isToday, shortFullDate) {
                 <img class="task-button" src="images/archive-icon.png" width="15px" height="15px">
             </div>
         `;
-    });
 
+    });
+    
+    if(tasksHTML.length === 0) {
+        tasksHTML += `
+            <p class="no-tasks">
+                No tasks here. Look elsewhere!
+            </p>
+        `;
+    }
     document.querySelector('.js-checklist-content-div').innerHTML = tasksHTML;
 }
 

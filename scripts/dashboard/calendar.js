@@ -1,12 +1,17 @@
 import { getCurrentDate, getDayOfTheWeekNumber, getNoOfDaysInAMonth, getFullDate, getShortDateString } from "../utils/dates.js";
 import { toggleOverlay } from "./toggle-overlay.js";
 import { loadTasksToOverlay } from "./tasks.js";
+import { getNumberOfTasks } from "../data/user-tasks.js";
+import { getUserId } from "../data/user-data.js";
 
 export function renderCalendarDashboard() {
     // rendering the calendar (html)
     let { month, date, year } = getCurrentDate();
-
     document.querySelector('.js-month').innerHTML = `${month} - ${year}`;
+
+    const params = new URLSearchParams(window.location.search);
+    const usernameFromParams = params.get('uname');
+    const userId = getUserId(usernameFromParams);
 
     let calendarHTML = '';
     // weekdates
@@ -18,6 +23,7 @@ export function renderCalendarDashboard() {
     calendarHTML += '</tr>'
     
     // rendering the actual dates
+    const numberOfTasks = getNumberOfTasks(userId);
     let day = 1;
     for(let i = 1; i <= 5; i++) {
         calendarHTML += '<tr>';
@@ -26,13 +32,18 @@ export function renderCalendarDashboard() {
                 calendarHTML += '<td></td>';
                 continue;
             } 
+
+            const shortFullDate = getShortDateString(month, day, year);
             calendarHTML += `
             <td class="
                 filled-cell
                 ${(day === Number(date)) ? 'today js-today' : ''}
                 ${(day < Number(date)) ? 'js-previous-days' : ''}
             " data-day="${day}">
-                ${(day > getNoOfDaysInAMonth(month, year)) ? '' : `${day} <br> Tasks Finished: N/A`}
+                ${(day > getNoOfDaysInAMonth(month, year)) ? '' : `
+                    ${day} <br> Tasks Finished: 
+                    ${(numberOfTasks.hasOwnProperty(shortFullDate)) ? numberOfTasks[shortFullDate] : 'N/A'}
+                `}
             </td>`;
             day++;
         }
