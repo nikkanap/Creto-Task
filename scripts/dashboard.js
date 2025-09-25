@@ -11,6 +11,7 @@ function renderDashboard() {
         event.stopPropagation(); // stops the event from propagating
         openAccountSettingsOverlay();
     });
+    renderUserDetails();
 
     document.querySelector('.js-log-out')
     .addEventListener('click', () => {
@@ -50,7 +51,7 @@ function renderDashboard() {
     }
     document.querySelector('.js-calendar').innerHTML = calendarHTML;
 
-    document.querySelectorAll('td').forEach((dayCell) => {
+    document.querySelectorAll('.calendar td').forEach((dayCell) => {
         dayCell.addEventListener('click', () => {
             // refuse opening the overlays for any invalid cells
             if(dayCell.classList.length === 0){
@@ -94,7 +95,6 @@ function renderDashboard() {
             closeAccountSettingsOverlay();
         }
     });
-    renderUserDetails();
 }
 renderDashboard();
 
