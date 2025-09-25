@@ -1,5 +1,6 @@
 import { users, userExists, validateLogin } from "./data/user-data.js";
 
+let timeout;
 const logInButton = document.querySelector('.js-log-in-button');
 logInButton.addEventListener('click', () => {
     const username = document.querySelector('.username').value;
@@ -14,11 +15,8 @@ logInButton.addEventListener('click', () => {
         displayInvalidLoginElement('Invalid Login.');
         return;
     } 
-    console.log(`${username} exists!`);
 
-    
     const validLogIn = validateLogin(username, password);
-
     if(validLogIn){
         console.log(`Valid login! Welcome, ${username}.`);
         window.location.href = "Dashboard.html";
@@ -28,7 +26,11 @@ logInButton.addEventListener('click', () => {
 });
 
 function displayInvalidLoginElement(content) {
+    clearTimeout(timeout); // clear the timeout
     const invalidLoginElement = document.querySelector('.js-invalid-login');
     invalidLoginElement.innerHTML = content;
     invalidLoginElement.classList.add('display-content');
+    timeout = setTimeout(() => {
+        invalidLoginElement.classList.remove('display-content');
+    }, 3000);
 }
