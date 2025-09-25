@@ -1,5 +1,6 @@
 import { getCurrentDateString } from "../utils/dates.js"; 
 
+// userdata for now
 export let users = JSON.parse(localStorage.getItem('users')) || [
     {
         userId: 'HY0rGRVqjFOFkIrKcFDS',
@@ -19,6 +20,7 @@ export let users = JSON.parse(localStorage.getItem('users')) || [
     }
 ];
 
+// checks if user with username exists
 export function userExists(username) {
     let doesUserExist = false;
     users.forEach((user) => {
@@ -30,6 +32,7 @@ export function userExists(username) {
     return doesUserExist;
 } 
 
+// gets a user object from username
 export function getUser(username) {
     let matchingUser;
     users.forEach((user) => {
@@ -39,11 +42,13 @@ export function getUser(username) {
     return matchingUser;
 } 
 
+// validates the username, password login
 export function validateLogin(username, password) {
     const user = getUser(username);
     return (user.password === password);
 }
 
+// saves a new account to users
 export function saveNewAccount(username, email, password) {
     users.push({
         userId: makeID(),
@@ -56,10 +61,12 @@ export function saveNewAccount(username, email, password) {
     saveToLocalStorage();
 }
 
+// save the current state of users to localStorage
 function saveToLocalStorage() {
     localStorage.setItem('users', JSON.stringify(users));
 }
 
+// generates a random ID
 export function makeID() {
     var id = '';
     var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -75,6 +82,7 @@ export function makeID() {
     return id;
 }
 
+// checks if userID exists
 function userIdExists(userId) {
     let doesUserIdExist = false;
     users.forEach((user) => {
@@ -85,10 +93,11 @@ function userIdExists(userId) {
     return doesUserIdExist;
 }
 
+// saves the daily quota the account sets and saves it to localStorage
 export function saveDailyQuota(username, dailyQuota) {
     const user = users.find(u => u.username === username);
     user.dailyQuota = dailyQuota;
-    localStorage.setItem('users', JSON.stringify(users));
+    saveToLocalStorage();
 }
 
 
