@@ -43,7 +43,7 @@ export function renderCalendarDashboard() {
         dayCell.addEventListener('click', (event) => {
             event.stopPropagation(); // stops the event from propagating
             // refuse opening the overlays for any invalid cells
-            if(dayCell.classList.length === 0){
+            if(dayCell.classList.length === 1){
                 return;
             }
 
