@@ -87,8 +87,23 @@ th {
     padding: 0px;
 }
 
-.content-div label {
-    display: block;
+.checklist-content-div p {
+    margin: 0;
+}
+
+.task {
+    display: grid;
+    grid-template-columns: 40px 300px 200px 30px 30px;
+    font-size: 12px;
+}
+
+.task-button {
+    cursor: pointer;
+}
+
+.checkbox-input {
+    width: 15px;
+    height: 15px;
 }
 
 /*Daily Quota elements*/
