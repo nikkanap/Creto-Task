@@ -99,7 +99,7 @@ export function getUserTasks(userId) {
     return userTasks[userId];
 }
 
-export function getNumberOfTasks(userId) {
+export function getNumberOfTasksCompleted(userId) {
     const userTasksCount = {};
     userTasks[userId].forEach((task) => {
         if (userTasksCount.hasOwnProperty(task.dateCompleted)){
