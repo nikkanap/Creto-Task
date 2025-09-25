@@ -22,7 +22,7 @@ th {
     border: 1px solid white;
 }
 
-.overlay-div hr {
+.journal-overlay hr {
     width: 94%;
     margin: 10px 20px;
     display: inline-block;
@@ -81,14 +81,14 @@ th {
     display: none;
 }
 
-.overlay-div {
+.journal-overlay {
     width: 700px;
     height: 90%;
     padding: 10px;
 }
 
 /*Daily Quota elements*/
-.daily-quota-div {
+.daily-quota-overlay {
     text-align: center;
     width: fit-content;
     height: fit-content;

@@ -1,24 +1,104 @@
-import { getCurrentDate, getDayOfTheWeekNumber, getNoOfDaysInAMonth, getFullDate } from "./utils/dates.js";
+import { getCurrentDate, getDayOfTheWeekNumber, getNoOfDaysInAMonth, getFullDate, getCurrentMonthYearString } from "./utils/dates.js";
 import { getUser, saveDailyQuota } from "./data/user-data.js";
 
 let timeout;
 function renderDashboard() {
-    let { month, date, year } = getCurrentDate();
-    document.querySelector('.js-month').innerHTML = `${month} - ${year}`;
+    renderDetails();
 
+    // Adding username on DB functionality
     document.querySelector('.js-username-link')
     .addEventListener('click', (event) => {
         event.stopPropagation(); // stops the event from propagating
-        openAccountSettingsOverlay();
+        toggleOverlay('js-account-settings-overlay', true);
     });
-    renderUserDetails();
-
+    
+    // Adding account settings logout button functionality
     document.querySelector('.js-log-out')
     .addEventListener('click', () => {
         window.location.href = "Home.html";
     });
 
+    renderCalendarDashboard();
+
+    // ---- journal portion functionalities ----
+    // close button functionality
+    const closeButton = document.querySelector('.js-journal-close-button');
+    closeButton.addEventListener('click', () => toggleOverlay('js-journal-overlay', false));
+
+    // open the daily quota nav if from signup
+    const params = new URLSearchParams(window.location.search);
+    if(params.get('from') === 'signup'){
+        toggleOverlay('js-daily-quota-overlay', true);
+        
+        document.querySelector('.js-set-to-default')
+        .addEventListener('click', () => {
+            if(window.confirm('Are you sure you wish to proceed?')) {
+                const usernameFromParams = params.get('uname');
+                saveDailyQuota(usernameFromParams, 5);
+                toggleOverlay('js-daily-quota-overlay', false);
+                history.replaceState({}, '', `Dashboard.html?uname=${encodeURIComponent(username)}`);
+                renderDetails();
+            }
+        });
+
+        document.querySelector('.js-proceed')
+        .addEventListener('click', () => {
+            const dailyQuota = document.querySelector('.js-daily-quota').value;
+            if(dailyQuota.length === 0){
+                displayInputError('Please enter a number before proceeding.');
+                return;
+            }
+
+            if(isNaN(dailyQuota)){
+                displayInputError('Please enter a valid number.');
+                return;
+            }
+
+            if(window.confirm('Are you sure?')){
+                const usernameFromParams = params.get('uname');
+                saveDailyQuota(usernameFromParams, Number(dailyQuota));
+                toggleOverlay('js-daily-quota-overlay', false);
+                history.replaceState({}, '', `Dashboard.html?uname=${encodeURIComponent(username)}`);
+                renderDetails();
+            }
+        });
+    }
+
+    // out of focus click events
+    document.addEventListener('click', (event) => {
+        const accountSettingsOverlay = document.querySelector('.js-account-settings-overlay');
+        if(accountSettingsOverlay.classList.contains('display-content') && !accountSettingsOverlay.contains(event.target)) {
+            toggleOverlay('js-account-settings-overlay', false);
+        }
+
+        const journalOverlay = document.querySelector('.js-journal-overlay');
+        if(journalOverlay.classList.contains('display-content') && !journalOverlay.contains(event.target)) {
+            toggleOverlay('js-journal-overlay', false);
+        }
+    });
+}
+renderDashboard();
+
+// render details from the dashboard like user 
+function renderDetails() {
+    let currentMonthYear = getCurrentMonthYearString();
+    document.querySelector('.js-month').innerHTML = currentMonthYear;
+
+    const params = new URLSearchParams(window.location.search);
+    const usernameFromParams = params.get('uname');
+    document.querySelectorAll('.js-username').forEach((username) => {
+        username.innerHTML = usernameFromParams;
+    });
+
+    const user = getUser(usernameFromParams);
+    document.querySelector('.js-email').innerHTML = user.email;
+    document.querySelector('.js-date-joined').innerHTML = user.dateJoined;
+    document.querySelector('.js-daily-quota-display').innerHTML = `${user.dailyQuota} tasks per day`;
+}
+
+function renderCalendarDashboard() {
     // rendering the calendar (html)
+    let { month, date, year } = getCurrentDate();
     let calendarHTML = '';
     // weekdates
     const weekdates = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -52,7 +132,8 @@ function renderDashboard() {
     document.querySelector('.js-calendar').innerHTML = calendarHTML;
 
     document.querySelectorAll('.calendar td').forEach((dayCell) => {
-        dayCell.addEventListener('click', () => {
+        dayCell.addEventListener('click', (event) => {
+            event.stopPropagation(); // stops the event from propagating
             // refuse opening the overlays for any invalid cells
             if(dayCell.classList.length === 0){
                 return;
@@ -68,61 +149,12 @@ function renderDashboard() {
                 dateWithWeek += ' (Today)';
             }
             document.querySelector('.js-journal-date').innerHTML = dateWithWeek;
-            openJournalOverlay();
+            toggleOverlay('js-journal-overlay', true);
         });
-    });
-
-    // ---- journal portion functionalities ----
-    // close button functionality
-    const closeButton = document.querySelector('.js-journal-close-button');
-    closeButton.addEventListener('click', () => closeJournalOverlay());
-
-    // open the daily quota nav if from signup
-    const params = new URLSearchParams(window.location.search);
-    if(params.get('from') === 'signup'){
-        openQuotaOverlay();
-        
-        document.querySelector('.js-set-to-default')
-        .addEventListener('click', () => {
-            if(window.confirm('Are you sure you wish to proceed?')) {
-                const usernameFromParams = params.get('uname');
-                saveDailyQuota(usernameFromParams, 5);
-                closeQuotaOverlay(usernameFromParams);
-                renderUserDetails();
-            }
-        });
-
-        document.querySelector('.js-proceed')
-        .addEventListener('click', () => {
-            const dailyQuota = document.querySelector('.js-daily-quota').value;
-            if(dailyQuota.length === 0){
-                displayInputError('Please enter a number before proceeding.');
-                return;
-            }
-
-            if(isNaN(dailyQuota)){
-                displayInputError('Please enter a valid number.');
-                return;
-            }
-
-            if(window.confirm('Are you sure?')){
-                const usernameFromParams = params.get('uname');
-                saveDailyQuota(usernameFromParams, Number(dailyQuota));
-                closeQuotaOverlay(usernameFromParams);
-                renderUserDetails();
-            }
-        });
-    }
-
-    const overlay = document.querySelector('.js-account-settings-overlay');
-    document.addEventListener('click', (event) => {
-        if(overlay.classList.contains('display-content') && !overlay.contains(event.target)) {
-            closeAccountSettingsOverlay();
-        }
     });
 }
-renderDashboard();
 
+// render the display input error 
 function displayInputError(content) {
     clearTimeout(timeout); // clear the timeout
     const inputError = document.querySelector('.js-input-error');
@@ -133,66 +165,12 @@ function displayInputError(content) {
     }, 3000);
 }
 
-function openJournalOverlay() {
-    openFade();
-    const overlayDiv = document.querySelector('.js-overlay-div');
-    overlayDiv.classList.add('display-content');
-}
-
-function closeJournalOverlay() {
-    closeFade();
-    const overlayDiv = document.querySelector('.js-overlay-div');
-    overlayDiv.classList.remove('display-content');
-}
-
-function openQuotaOverlay() {
-    openFade();
-    const overlayDiv = document.querySelector('.js-daily-quota-div');
-    overlayDiv.classList.add('display-content');
-}
-
-function closeQuotaOverlay(username) {
-    closeFade();
-    const overlayDiv = document.querySelector('.js-daily-quota-div');
-    overlayDiv.classList.remove('display-content');
-
-    // changes the state of the URL
-    history.replaceState({}, '', `Dashboard.html?uname=${encodeURIComponent(username)}`);
-}
-
-function openAccountSettingsOverlay() {
-    openFade();
-    const overlayDiv = document.querySelector('.js-account-settings-overlay');
-    overlayDiv.classList.add('display-content');
-}
-
-function closeAccountSettingsOverlay() {
-    closeFade();
-    const overlayDiv = document.querySelector('.js-account-settings-overlay');
-    overlayDiv.classList.remove('display-content');
-}
-
-function closeFade() {
+// open any overlay based on classname
+function toggleOverlay(className, show){
     const backgroundFade = document.querySelector('.js-background-fade');
-    backgroundFade.classList.remove('display-content');
-}
-
-function openFade() {
-    const backgroundFade = document.querySelector('.js-background-fade');
-    backgroundFade.classList.add('display-content');
-}
-
-function renderUserDetails() {
-    const params = new URLSearchParams(window.location.search);
-    const usernameFromParams = params.get('uname');
-    document.querySelectorAll('.js-username').forEach((username) => {
-        username.innerHTML = usernameFromParams;
-    });
-
-    const user = getUser(usernameFromParams);
-    document.querySelector('.js-email').innerHTML = user.email;
-    document.querySelector('.js-date-joined').innerHTML = user.dateJoined;
-    document.querySelector('.js-daily-quota-display').innerHTML = `${user.dailyQuota} tasks per day`;
+    backgroundFade.classList.toggle('display-content', show);
+    const overlayDiv = document.querySelector(`.${className}`);
+    overlayDiv.classList.toggle('display-content', show);
 }
 
 
