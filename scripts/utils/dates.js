@@ -24,7 +24,12 @@ export function getFullDate(month, day, year) {
 }
 
 export function getCurrentDateString(){
-    return dayjs().format('MMMM D, YYYY');
+    return dayjs('').format('MMMM D, YYYY');
+}
+
+export function getShortDateString(month, day, year) {
+    let selectedDate = dayjs(`${month} ${day}, ${year}`, 'MMMM D, YYYY');
+    return selectedDate.format('MM/DD/YYYY');
 }
 
 export function getCurrentMonthYearString() {

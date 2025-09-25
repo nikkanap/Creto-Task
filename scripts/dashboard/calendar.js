@@ -1,7 +1,6 @@
-import { getCurrentDate, getDayOfTheWeekNumber, getNoOfDaysInAMonth, getFullDate } from "../utils/dates.js";
+import { getCurrentDate, getDayOfTheWeekNumber, getNoOfDaysInAMonth, getFullDate, getShortDateString } from "../utils/dates.js";
 import { toggleOverlay } from "./toggle-overlay.js";
-import { getUserTasks } from "../data/user-tasks.js";
-import { getUserId } from "../data/user-data.js";
+import { loadTasksToOverlay } from "./tasks.js";
 
 export function renderCalendarDashboard() {
     // rendering the calendar (html)
@@ -54,41 +53,19 @@ export function renderCalendarDashboard() {
             document.querySelector('.journal-entry-field')
             .readOnly = (isToday) ? false : true;
 
-            loadTasksToOverlay(isToday);
-
             const { day } = dayCell.dataset;
             let dateWithWeek = getFullDate(month, day, year);
+
             if(dayCell.classList.contains('js-today')) {
                 dateWithWeek += ' (Today)';
             }
             document.querySelector('.js-journal-date').innerHTML = dateWithWeek;
+
+            const shortFullDate = getShortDateString(month, day, year);
+            loadTasksToOverlay(isToday, shortFullDate);
+
             toggleOverlay('js-journal-overlay', true);
         });
     });
 }
 
-function loadTasksToOverlay(isToday) {
-    const params = new URLSearchParams(window.location.search);
-    const usernameFromParams = params.get('uname');
-    const userId = getUserId(usernameFromParams);
-
-    let tasksHTML = '';
-    const tasks = getUserTasks(userId);
-    tasks.forEach((task) => {
-        if(task.completed === true && isToday)
-            return;
-
-        tasksHTML += `
-            <div class="task">
-                <input class="task-button checkbox-input" type="checkbox" name="checklist" value="checklist" id="1">
-                <p>${task.taskDescription}</p>
-                <p>Deadline: ${task.deadline}</p>
-                <img class="task-button" src="images/trash-icon.png" width="15px" height="15px">
-                <img class="task-button" src="images/archive-icon.png" width="15px" height="15px">
-            </div>
-        `;
-        console.log(task);
-    });
-
-    document.querySelector('.js-checklist-content-div').innerHTML = tasksHTML;
-}
