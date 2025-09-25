@@ -84,7 +84,7 @@ th {
 .journal-overlay {
     width: 700px;
     height: 90%;
-    padding: 10px;
+    padding: 0px;
 }
 
 .content-div label {
@@ -115,7 +115,7 @@ th {
 
 /* Journal Overlay elements */
 .journal-date {
-    margin-left: 15px;
+    margin-left: 30px;
 }
 
 .journal-close-button {
@@ -135,27 +135,35 @@ th {
     border: none;
     border-radius: 10px;
     background-color: rgb(64, 80, 99);
-    width: 97%;
-    height: 44%;
+    width: 90%;
+    height: 40%;
     margin: auto;
     margin-bottom: 15px;
+    padding: 10px;
+    padding-top: 0;
 }
 
 .portion-title {
     margin-left: 20px;
     display: block;
     margin-bottom: 0;
+    margin-top: 0;
 }
 
 /*the journal entry portion*/
 .content-div {
-    height: 100%;
+    height: 70%;
     padding: 0px 20px;
 }
 
+.checklist-content-div {
+    overflow-y: auto;
+}
+
+
 .journal-entry-field {
     width: 99%;
-    height: 70%;
+    height: 98%;
     display: block;
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(64, 80, 99);
