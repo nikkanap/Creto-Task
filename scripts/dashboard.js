@@ -4,7 +4,13 @@ function renderDashboard() {
     let { month, date, year } = getCurrentDate();
     document.querySelector('.js-month').innerHTML = `${month} - ${year}`;
     
-    document.querySelector('.js-username')
+    const params = new URLSearchParams(window.location.search);
+    const usernameFromParams = params.get('uname');
+    document.querySelectorAll('.js-username').forEach((username) => {
+        username.innerHTML = usernameFromParams;
+    });
+
+    document.querySelector('.js-username-link')
     .addEventListener('click', (event) => {
         event.stopPropagation(); // stops the event from propagating
         openAccountSettingsOverlay();
@@ -75,7 +81,6 @@ function renderDashboard() {
     closeButton.addEventListener('click', () => closeJournalOverlay());
 
     // open the daily quota nav if from signup
-    const params = new URLSearchParams(window.location.search);
     if(params.get('from') === 'signup'){
         openQuotaOverlay();
 
@@ -113,13 +118,13 @@ function openQuotaOverlay() {
     overlayDiv.classList.add('display-content');
 }
 
-function closeQuotaOverlay() {
+function closeQuotaOverlay(username) {
     closeFade();
     const overlayDiv = document.querySelector('.js-daily-quota-div');
     overlayDiv.classList.remove('display-content');
 
     // changes the state of the URL
-    history.replaceState({}, '', 'Dashboard.html');
+    history.replaceState({}, '', `Dashboard.html?uname=${encodeURIComponent(username)}`);
 }
 
 function openAccountSettingsOverlay() {

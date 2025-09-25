@@ -19,7 +19,7 @@ logInButton.addEventListener('click', () => {
     const validLogIn = validateLogin(username, password);
     if(validLogIn){
         console.log(`Valid login! Welcome, ${username}.`);
-        window.location.href = "Dashboard.html";
+        window.location.href = `Dashboard.html?uname=${encodeURIComponent(username)}`;
         return;
     }
     displayInvalidLoginElement('Invalid Login.');

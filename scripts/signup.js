@@ -38,7 +38,7 @@ logInButton.addEventListener('click', () => {
     }
 
     saveNewAccount(username, email, password);
-    window.location.href = "Dashboard.html?from=signup";
+    window.location.href = `Dashboard.html?from=signup&uname=${encodeURIComponent(username)}`;
 });
 
 function displayInvalidSignupElement(content) {
