@@ -87,6 +87,10 @@ th {
     padding: 10px;
 }
 
+.content-div label {
+    display: block;
+}
+
 /*Daily Quota elements*/
 .daily-quota-overlay {
     text-align: center;
@@ -144,14 +148,14 @@ th {
 }
 
 /*the journal entry portion*/
-.journal-entry-div {
+.content-div {
     height: 100%;
+    padding: 0px 20px;
 }
 
 .journal-entry-field {
-    width: 94%;
+    width: 99%;
     height: 70%;
-    margin: auto;
     display: block;
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(64, 80, 99);

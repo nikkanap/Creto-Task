@@ -33,7 +33,7 @@
                     (You can edit this in your account settings later.)
                 </p>
             </div>
-            <input class="input-field js-daily-quota" type="text" name="daily-quota" placeholder="Enter your daily quota">
+            <input class="input-field js-daily-quota" type="text" min="1" name="daily-quota" placeholder="Enter your daily quota">
             <p class="invalid-input js-input-error"></p>
             <br>
             <button class="button js-set-to-default">SET TO DEFAULT (5)</button>
@@ -42,7 +42,6 @@
 
 
         <!--Journal Log Overlay-->
-        </div>
         <div class="overlay journal-overlay js-journal-overlay">
             <button class="journal-close-button js-journal-close-button">X</button>
             <p class="journal-date js-journal-date"></p>
@@ -50,7 +49,7 @@
             <div class="journal-entry-portion">
                 <p class="portion-title">Journal Entry</p>
                 <hr> 
-                <div class="journal-entry-div">   
+                <div class="content-div">   
                     <textarea class="journal-entry-field" placeholder="Enter a log..."></textarea>
                 </div>
             </div> 
@@ -58,8 +57,57 @@
             <div class="checklist-portion">
                 <p class="portion-title">Checklist</p>
                 <hr> 
-                <div class="journal-entry-div">   
-                    <textarea class="journal-entry-field" placeholder="Enter a log..."></textarea>
+                <div class="content-div">   
+                    <form>
+                        <label>
+                            <input type="checkbox" name="checklist" value="checklist">
+                            This is a task 1
+                        </label>
+                        <label>
+                            <input type="checkbox" name="checklist" value="checklist">
+                            This is a task 2
+                        </label>
+                        <label>
+                            <input type="checkbox" name="checklist" value="checklist">
+                            This is a task 3
+                        </label>
+                        <label>
+                            <input type="checkbox" name="checklist" value="checklist">
+                            This is a task 3
+                        </label>
+                        <label>
+                            <input type="checkbox" name="checklist" value="checklist">
+                            This is a task 3
+                        </label>
+                        <label>
+                            <input type="checkbox" name="checklist" value="checklist">
+                            This is a task 3
+                        </label>
+                        <label>
+                            <input type="checkbox" name="checklist" value="checklist">
+                            This is a task 3
+                        </label>
+                        <label>
+                            <input type="checkbox" name="checklist" value="checklist">
+                            This is a task 3
+                        </label>
+                        <label>
+                            <input type="checkbox" name="checklist" value="checklist">
+                            This is a task 3
+                        </label>
+                        <label>
+                            <input type="checkbox" name="checklist" value="checklist">
+                            This is a task 3
+                        </label>
+                        <label>
+                            <input type="checkbox" name="checklist" value="checklist">
+                            This is a task 3
+                        </label>
+                        <label>
+                            <input type="checkbox" name="checklist" value="checklist">
+                            This is a task 3
+                        </label>
+                    </form>
                 </div>
             </div> 
         </div>
