@@ -22,3 +22,8 @@ export function getFullDate(month, day, year) {
     let selectedDate = dayjs(`${month} ${day}, ${year}`, 'MMMM D, YYYY');
     return selectedDate.format('dddd - MMMM D, YYYY');
 }
+
+export function getCurrentDateString(){
+    const fullDate = dayjs();
+    return fullDate.format('MMMM D, YYYY');
+}

@@ -1,14 +1,10 @@
 import { getCurrentDate, getDayOfTheWeekNumber, getNoOfDaysInAMonth, getFullDate } from "./utils/dates.js";
+import { getUser, users } from "./data/user-data.js";
 
 function renderDashboard() {
+    console.log(users);
     let { month, date, year } = getCurrentDate();
     document.querySelector('.js-month').innerHTML = `${month} - ${year}`;
-    
-    const params = new URLSearchParams(window.location.search);
-    const usernameFromParams = params.get('uname');
-    document.querySelectorAll('.js-username').forEach((username) => {
-        username.innerHTML = usernameFromParams;
-    });
 
     document.querySelector('.js-username-link')
     .addEventListener('click', (event) => {
@@ -81,6 +77,7 @@ function renderDashboard() {
     closeButton.addEventListener('click', () => closeJournalOverlay());
 
     // open the daily quota nav if from signup
+    const params = new URLSearchParams(window.location.search);
     if(params.get('from') === 'signup'){
         openQuotaOverlay();
 
@@ -97,6 +94,7 @@ function renderDashboard() {
             closeAccountSettingsOverlay();
         }
     });
+    renderUserDetails();
 }
 renderDashboard();
 
@@ -147,6 +145,18 @@ function closeFade() {
 function openFade() {
     const backgroundFade = document.querySelector('.js-background-fade');
     backgroundFade.classList.add('display-content');
+}
+
+function renderUserDetails() {
+    const params = new URLSearchParams(window.location.search);
+    const usernameFromParams = params.get('uname');
+    document.querySelectorAll('.js-username').forEach((username) => {
+        username.innerHTML = usernameFromParams;
+    });
+
+    const user = getUser(usernameFromParams);
+    document.querySelector('.js-email').innerHTML = user.email;
+    document.querySelector('.js-date-joined').innerHTML = user.dateJoined;
 }
 
 

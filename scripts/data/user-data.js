@@ -1,9 +1,12 @@
-const users = JSON.parse(localStorage.getItem('users')) || [
+import { getCurrentDateString } from "../utils/dates.js"; 
+
+export let users = JSON.parse(localStorage.getItem('users')) || [
     {
         userId: 'HY0rGRVqjFOFkIrKcFDS',
         username: 'NioDilao',
         email: 'emailAddress@gmail.com',
         password: 'password123',
+        dateJoined: 'May 3, 2025',
         dailyQuota: 5
     },
     {
@@ -11,6 +14,7 @@ const users = JSON.parse(localStorage.getItem('users')) || [
         username: 'NikkaNaputo',
         email: 'nikkanaputo@gmail.com',
         password: 'testPass',
+        dateJoined: 'September 2, 2025',
         dailyQuota: 10
     }
 ];
@@ -40,15 +44,16 @@ export function validateLogin(username, password) {
     return (user.password === password);
 }
 
-export function saveNewAccount(username, password, email) {
+export function saveNewAccount(username, email, password) {
     users.push({
         userId: makeID(),
         username,
         email,
         password,
+        dateJoined: getCurrentDateString(),
         dailyQuota: 0 
     });
-    console.log(users);
+    saveToLocalStorage();
 }
 
 function saveToLocalStorage() {
