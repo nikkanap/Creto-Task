@@ -99,7 +99,7 @@ th {
 }
 
 .input-field {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 /* */
@@ -197,3 +197,11 @@ th {
     background-color: rgb(64, 80, 99);
 }
 
+.invalid-input {
+    text-align: center;
+    margin: auto;
+}
+
+.button {
+    font-size: 12px;
+}

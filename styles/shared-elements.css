@@ -49,7 +49,18 @@
     padding: 5px;
 }
 
+.invalid-input {
+    font-size: 10px;
+    font-style: italic;
+    color: rgb(255, 0, 0);
+    opacity: 0.8;
+    margin: auto;
+    display: none;
+    text-align: right;
+}
+
 /*displaying the overlay*/
 .display-content {
     display: block !important;
 }
+

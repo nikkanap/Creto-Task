@@ -85,5 +85,10 @@ function userIdExists(userId) {
     return doesUserIdExist;
 }
 
+export function saveDailyQuota(username, dailyQuota) {
+    const user = users.find(u => u.username === username);
+    user.dailyQuota = dailyQuota;
+    localStorage.setItem('users', JSON.stringify(users));
+}
 
 

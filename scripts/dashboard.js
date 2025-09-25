@@ -1,8 +1,8 @@
 import { getCurrentDate, getDayOfTheWeekNumber, getNoOfDaysInAMonth, getFullDate } from "./utils/dates.js";
-import { getUser, users } from "./data/user-data.js";
+import { getUser, saveDailyQuota } from "./data/user-data.js";
 
+let timeout;
 function renderDashboard() {
-    console.log(users);
     let { month, date, year } = getCurrentDate();
     document.querySelector('.js-month').innerHTML = `${month} - ${year}`;
 
@@ -81,12 +81,37 @@ function renderDashboard() {
     const params = new URLSearchParams(window.location.search);
     if(params.get('from') === 'signup'){
         openQuotaOverlay();
-
+        
         document.querySelector('.js-set-to-default')
-        .addEventListener('click', () => closeQuotaOverlay());
+        .addEventListener('click', () => {
+            if(window.confirm('Are you sure you wish to proceed?')) {
+                const usernameFromParams = params.get('uname');
+                saveDailyQuota(usernameFromParams, 5);
+                closeQuotaOverlay(usernameFromParams);
+                renderUserDetails();
+            }
+        });
 
         document.querySelector('.js-proceed')
-        .addEventListener('click', () => closeQuotaOverlay());
+        .addEventListener('click', () => {
+            const dailyQuota = document.querySelector('.js-daily-quota').value;
+            if(dailyQuota.length === 0){
+                displayInputError('Please enter a number before proceeding.');
+                return;
+            }
+
+            if(isNaN(dailyQuota)){
+                displayInputError('Please enter a valid number.');
+                return;
+            }
+
+            if(window.confirm('Are you sure?')){
+                const usernameFromParams = params.get('uname');
+                saveDailyQuota(usernameFromParams, Number(dailyQuota));
+                closeQuotaOverlay(usernameFromParams);
+                renderUserDetails();
+            }
+        });
     }
 
     const overlay = document.querySelector('.js-account-settings-overlay');
@@ -97,6 +122,16 @@ function renderDashboard() {
     });
 }
 renderDashboard();
+
+function displayInputError(content) {
+    clearTimeout(timeout); // clear the timeout
+    const inputError = document.querySelector('.js-input-error');
+    inputError.innerHTML = content;
+    inputError.classList.add('display-content');
+    timeout = setTimeout(() => {
+        inputError.classList.remove('display-content');
+    }, 3000);
+}
 
 function openJournalOverlay() {
     openFade();
@@ -157,6 +192,7 @@ function renderUserDetails() {
     const user = getUser(usernameFromParams);
     document.querySelector('.js-email').innerHTML = user.email;
     document.querySelector('.js-date-joined').innerHTML = user.dateJoined;
+    document.querySelector('.js-daily-quota-display').innerHTML = `${user.dailyQuota} tasks per day`;
 }
 
 

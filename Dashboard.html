@@ -2,8 +2,8 @@
 <html>
     <head>
         <title>Creto Task - Dashboard</title>
-        <link rel="stylesheet" href="styles/dashboard.css">
         <link rel="stylesheet" href="styles/shared-elements.css">
+        <link rel="stylesheet" href="styles/dashboard.css">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -33,7 +33,8 @@
                     (You can edit this in your account settings later.)
                 </p>
             </div>
-            <input class="input-field" type="text" name="daily-quota" placeholder="Enter a number">
+            <input class="input-field js-daily-quota" type="text" name="daily-quota" placeholder="Enter your daily quota">
+            <p class="invalid-input js-input-error"></p>
             <br>
             <button class="button js-set-to-default">SET TO DEFAULT (5)</button>
             <button class="button js-proceed">PROCEED</button>
@@ -83,7 +84,7 @@
                 </tr>
                 <tr>
                     <td>Daily Task Quota</td>
-                    <td>5 tasks per day</td>
+                    <td class="js-daily-quota-display"></td>
                 </tr>
             </table>
             <hr>
