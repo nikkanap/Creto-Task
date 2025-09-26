@@ -5,4 +5,8 @@ export function toggleOverlay(className, show){
     
     document.querySelector(`.${className}`)
     .classList.toggle('display-content', show);
+
+    if(className === 'js-journal-overlay' && !show){
+        document.querySelector('.js-journal-entry-field').innerHTML = '';
+    }
 }

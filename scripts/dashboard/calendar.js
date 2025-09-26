@@ -3,6 +3,7 @@ import { toggleOverlay } from "./toggle-overlay.js";
 import { loadTasksToOverlay } from "./tasks.js";
 import { getNumberOfTasksCompleted } from "../data/user-tasks.js";
 import { getUserId } from "../data/user-data.js";
+import { loadJournalLog } from "./journal-logs.js";
 
 export function renderCalendarDashboard() {
     // rendering the calendar (html)
@@ -84,6 +85,7 @@ export function renderCalendarDashboard() {
 
             const shortFullDate = getShortDateString(month, day, year);
             loadTasksToOverlay(isToday, shortFullDate);
+            loadJournalLog(userId, shortFullDate);
 
             toggleOverlay('js-journal-overlay', true);
         });
