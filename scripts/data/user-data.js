@@ -50,8 +50,9 @@ export function validateLogin(username, password) {
 
 // saves a new account to users
 export function saveNewAccount(username, email, password) {
+    const userId = makeID()
     users.push({
-        userId: makeID(),
+        userId,
         username,
         email,
         password,
@@ -59,6 +60,7 @@ export function saveNewAccount(username, email, password) {
         dailyQuota: 0 
     });
     saveToLocalStorage();
+    return userId;
 }
 
 // save the current state of users to localStorage
@@ -98,6 +100,7 @@ export function saveDailyQuota(username, dailyQuota) {
     const user = users.find(u => u.username === username);
     user.dailyQuota = dailyQuota;
     saveToLocalStorage();
+    setCurrentUser(username);
 }
 
 export function getUserId(username) {
@@ -105,4 +108,15 @@ export function getUserId(username) {
     return user.userId;
 }
 
+export function setCurrentUser(username) {
+    const user = getUser(username);
+    localStorage.setItem('current-user', JSON.stringify(user));
+}
 
+export function getCurrentUser() {
+    return JSON.parse(localStorage.getItem('current-user'));
+}
+
+export function removeCurrentUser() {
+    localStorage.removeItem('current-user');
+}

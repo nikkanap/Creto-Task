@@ -1,4 +1,4 @@
-const journalEntries = {
+const journalEntries = JSON.parse(localStorage.getItem('journal-entries')) || {
     'HY0rGRVqjFOFkIrKcFDS' : {
         '09/01/2025': 'This is my journal log from September 1, 2025. This is pretty cool! Hope it works out.',
         '09/02/2025': 'Had a busy day today, but I managed to finish most of my tasks. Feeling accomplished!',
@@ -30,4 +30,19 @@ const journalEntries = {
 
 export function getLogsFromUserId(userId) {
     return journalEntries[userId];
+}
+
+export function saveJournalLogToJournalEntries(userId, journalEntry, date) {
+    const userLogs = getLogsFromUserId(userId);
+    userLogs[date] = journalEntry;
+    saveToLocalStorage();
+}
+
+function saveToLocalStorage() {
+    localStorage.setItem('journal-entries', JSON.stringify(journalEntries));
+}
+
+export function createEmptyJournalLogs(userId) {
+    journalEntries[userId] = {};
+    saveToLocalStorage();
 }

@@ -91,9 +91,17 @@ const userTasks = {
             completed: false,
             archived: true
         }
-
     ] 
 };
+
+function saveToLocalStorage() {
+    localStorage.setItem('user-tasks', JSON.stringify(userTasks));
+}
+
+export function createEmptyTasks(userId) {
+    userTasks[userId] = [];
+    saveToLocalStorage();
+}
 
 export function getUserTasks(userId) {
     return userTasks[userId];
@@ -101,6 +109,8 @@ export function getUserTasks(userId) {
 
 export function getNumberOfTasksCompleted(userId) {
     const userTasksCount = {};
+
+    if(userTasks[userId])
     userTasks[userId].forEach((task) => {
         if (userTasksCount.hasOwnProperty(task.dateCompleted)){
             userTasksCount[task.dateCompleted] += 1;

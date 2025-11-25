@@ -1,4 +1,6 @@
 import { userExists, saveNewAccount } from "./data/user-data.js";
+import { createEmptyTasks } from "./data/user-tasks.js";
+import { createEmptyJournalLogs } from "./data/user-journal-entries.js";
 
 let timeout;
 const logInButton = document.querySelector('.js-sign-up-button');
@@ -37,8 +39,11 @@ logInButton.addEventListener('click', () => {
         return;
     }
 
-    saveNewAccount(username, email, password);
-    window.location.href = `Dashboard.html?from=signup&uname=${encodeURIComponent(username)}`;
+    const userId = saveNewAccount(username, email, password);
+    createEmptyTasks(userId);
+    createEmptyJournalLogs(userId);
+    window.location.href = `Dashboard.html?from=signup`;
+    setCurrentUser(username);
 });
 
 function displayInvalidSignupElement(content) {

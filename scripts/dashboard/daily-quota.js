@@ -1,17 +1,17 @@
-import { saveDailyQuota } from "../data/user-data.js";
+import { getCurrentUser, saveDailyQuota } from "../data/user-data.js";
 import { toggleOverlay } from "./toggle-overlay.js";
 import { renderDetails } from "./details.js";
 
 let timeout;
 export function renderDailyQuota() {
-    const params = new URLSearchParams(window.location.search);
-    const usernameFromParams = params.get('uname');
+    const currentUser = getCurrentUser();
+    const username = currentUser.username;
     toggleOverlay('js-daily-quota-overlay', true);
     
     document.querySelector('.js-set-to-default')
     .addEventListener('click', () => {
         if(window.confirm('Are you sure you wish to proceed?')) {
-            closeDailyQuota(usernameFromParams, 5);
+            closeDailyQuota(username, 5);
         }
     });
 
@@ -29,7 +29,7 @@ export function renderDailyQuota() {
         }
 
         if(window.confirm('Are you sure?')){
-            closeDailyQuota(usernameFromParams, Number(dailyQuota));
+            closeDailyQuota(username, Number(dailyQuota));
         }
     });
 }
@@ -37,7 +37,7 @@ export function renderDailyQuota() {
 function closeDailyQuota(username, dailyQuota) {
     saveDailyQuota(username, dailyQuota);
     toggleOverlay('js-daily-quota-overlay', false);
-    history.replaceState({}, '', `Dashboard.html?uname=${encodeURIComponent(username)}`);
+    history.replaceState({}, '', `Dashboard.html`);
     renderDetails();
 }
 

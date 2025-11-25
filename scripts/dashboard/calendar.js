@@ -1,18 +1,16 @@
 import { getCurrentDate, getDayOfTheWeekNumber, getNoOfDaysInAMonth, getFullDate, getShortDateString } from "../utils/dates.js";
 import { toggleOverlay } from "./toggle-overlay.js";
+import { loadJournalLog } from "./journal-logs.js";
 import { loadTasksToOverlay } from "./tasks.js";
 import { getNumberOfTasksCompleted } from "../data/user-tasks.js";
-import { getUserId } from "../data/user-data.js";
-import { loadJournalLog } from "./journal-logs.js";
+import { getCurrentUser } from "../data/user-data.js";
 
 export function renderCalendarDashboard() {
     // rendering the calendar (html)
     let { month, date, year } = getCurrentDate();
     document.querySelector('.js-month').innerHTML = `${month} - ${year}`;
-
-    const params = new URLSearchParams(window.location.search);
-    const usernameFromParams = params.get('uname');
-    const userId = getUserId(usernameFromParams);
+    const currentUser = getCurrentUser();
+    const userId = currentUser.userId;
 
     // Rendering the calendar in the dashboard
     let calendarHTML = '';
