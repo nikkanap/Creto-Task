@@ -1,14 +1,16 @@
-import { renderCalendarDashboard } from "./dashboard/calendar.js";
+import { clearIsTodayAndShortFullDate, renderCalendarDashboard, shortFullDate } from "./dashboard/calendar.js";
 import { toggleOverlay } from "./dashboard/toggle-overlay.js";
 import { renderDailyQuota } from "./dashboard/daily-quota.js";
 import { renderDetails } from "./dashboard/details.js";
 import { saveJournalLog } from "./dashboard/journal-logs.js";
-import { removeCurrentUser } from "./data/user-data.js";
+import { getCurrentUser, removeCurrentUser } from "./data/user-data.js";
+import { toggleAddTasks } from "./dashboard/tasks.js";
+import { addNewTask } from "./data/user-tasks.js";
 
 function renderDashboard() {
     // rendering dashboard content
     renderDetails();
-    renderCalendarDashboard();
+    renderCalendarDashboard(0);
 
     // open the daily quota nav if from signup
     const params = new URLSearchParams(window.location.search);
@@ -63,13 +65,39 @@ function addElementEvents() {
     // ---- journal portion functionalities ----
     // close button functionality
     document.querySelector('.js-journal-close-button')
-    .addEventListener('click', () => toggleOverlay('js-journal-overlay', false));
+    .addEventListener('click', () => {
+        toggleOverlay('js-journal-overlay', false);
+        clearIsTodayAndShortFullDate();
+    });
 
+    // out of focus functionality
     document.querySelector('.js-journal-entry-field')
     .addEventListener('focusout', () => {
-        saveJournalLog();
+        const userId = getCurrentUser().userId;
+        saveJournalLog(userId, shortFullDate);
     });
-        
+    
+    // ---- task portion functionalities ----
+    document.querySelector('.js-portion-add-task')
+    .addEventListener('click', () => {
+        toggleAddTasks(true);
+    });
+
+    document.querySelector('.js-close-add-task-button')
+    .addEventListener('click', () => {
+        toggleAddTasks(false);
+    });
+
+    document.querySelector('.js-save-task-button')
+    .addEventListener('click', () => {
+        const currentUser = getCurrentUser();
+        const userId = currentUser.userId;
+        const taskDescription = document.querySelector('.js-task-description').value;
+        const taskDeadline = document.querySelector('.js-date-input').value;
+
+        addNewTask(userId, taskDescription, taskDeadline);
+        toggleAddTasks(false);
+    });
 }
 
 
