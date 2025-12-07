@@ -8,7 +8,9 @@
     </head>
     <body>
         <p class="logo-title">Creto Task</p>
+        <button class="prev-month js-prev-month"><</button>
         <p class="month js-month"></p>
+        <button class="next-month js-next-month">></button>
         <p class="username js-username js-username-link"></p>
         <table class="calendar js-calendar">
         </table>
@@ -40,7 +42,6 @@
             <button class="button js-proceed">PROCEED</button>
         </div>
 
-
         <!--Journal Log Overlay-->
         <div class="overlay journal-overlay js-journal-overlay">
             <button class="journal-close-button js-journal-close-button">X</button>
@@ -58,12 +59,29 @@
                 <div class="checklist-header">
                     <p class="portion-title">Checklist</p>
                     <p class="portion-add-task js-portion-add-task">Add Task</p>
+
+                    <div class="add-task-overlay js-add-task-overlay">
+                        <button class="close-add-task-button js-close-add-task-button">X</button>
+                            
+                        <div class="add-task-div">
+                            <p>Add New Task</p>
+                            <label>
+                                Task description
+                                <input class="js-task-description" type="text" />
+                            </label>
+                            <label>
+                                Task Deadline
+                                <input class="date-input js-date-input" type="date" />
+                            </label>
+                            <button class="save-task-button js-save-task-button">Save</button>
+                        </div>
+                    </div>
                 </div>
                 
                 <hr> 
                 <div class="content-div checklist-content-div js-checklist-content-div"></div>
             </div> 
-        </div>
+        </div>        
 
         <!--Account Settings Overlay-->
         <div class="account-settings-overlay js-account-settings-overlay">
