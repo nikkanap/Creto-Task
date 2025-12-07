@@ -1,4 +1,4 @@
-import { userExists, validateLogin } from "./data/user-data.js";
+import { getUserId, userExists, validateLogin } from "./data/user-data.js";
 import { setCurrentUser } from "./data/user-data.js";
 
 let timeout;
@@ -21,7 +21,7 @@ logInButton.addEventListener('click', () => {
     if(validLogIn){
         console.log(`Valid login! Welcome, ${username}.`);
         window.location.href = `Dashboard.html`;
-        setCurrentUser(username);
+        setCurrentUser(getUserId(username));
         return;
     }
     displayInvalidLoginElement('Invalid Login.');

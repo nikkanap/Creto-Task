@@ -1,4 +1,4 @@
-import { userExists, saveNewAccount } from "./data/user-data.js";
+import { userExists, getUserId, saveNewAccount, setCurrentUser } from "./data/user-data.js";
 import { createEmptyTasks } from "./data/user-tasks.js";
 import { createEmptyJournalLogs } from "./data/user-journal-entries.js";
 
@@ -43,7 +43,7 @@ logInButton.addEventListener('click', () => {
     createEmptyTasks(userId);
     createEmptyJournalLogs(userId);
     window.location.href = `Dashboard.html?from=signup`;
-    setCurrentUser(username);
+    setCurrentUser(getUserId(username));
 });
 
 function displayInvalidSignupElement(content) {

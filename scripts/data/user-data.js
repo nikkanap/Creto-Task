@@ -33,24 +33,28 @@ export function userExists(username) {
 } 
 
 // gets a user object from username
-export function getUser(username) {
-    let matchingUser;
-    users.forEach((user) => {
-        if(username === user.username) 
-            matchingUser = user;
-    });
-    return matchingUser;
+export function getUserFromUsername(username) {
+    return users.find((user) => username === user.username);
 } 
+
+export function getUserFromID(userId) {
+    return users.find((user) => userId === user.userId);
+} 
+
+export function getUserId(username) {
+    const user = getUserFromUsername(username);
+    return user.userId;
+}
 
 // validates the username, password login
 export function validateLogin(username, password) {
-    const user = getUser(username);
+    const user = getUserFromUsername(username);
     return (user.password === password);
 }
 
 // saves a new account to users
 export function saveNewAccount(username, email, password) {
-    const userId = makeID()
+    const userId = makeID();
     users.push({
         userId,
         username,
@@ -97,19 +101,16 @@ function userIdExists(userId) {
 
 // saves the daily quota the account sets and saves it to localStorage
 export function saveDailyQuota(username, dailyQuota) {
-    const user = users.find(u => u.username === username);
+    const user = getUserFromUsername(username);
     user.dailyQuota = dailyQuota;
     saveToLocalStorage();
-    setCurrentUser(username);
+
+    const userId = user.userId;
+    setCurrentUser(userId);
 }
 
-export function getUserId(username) {
-    const user = getUser(username);
-    return user.userId;
-}
-
-export function setCurrentUser(username) {
-    const user = getUser(username);
+export function setCurrentUser(userId) {
+    const user = getUserFromID(userId);
     localStorage.setItem('current-user', JSON.stringify(user));
 }
 
