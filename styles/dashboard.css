@@ -22,13 +22,10 @@ th {
     border: 1px solid white;
 }
 
-.journal-overlay hr {
-    width: 94%;
-    margin: 10px 20px;
-    display: inline-block;
-}
-
-.filled-cell:hover, .journal-close-button:hover {
+.filled-cell:hover, 
+.journal-close-button:hover,  
+.close-add-task-button:hover,
+.save-task-button:hover {
     background-color: rgb(64, 80, 99);
 }
 
@@ -36,16 +33,47 @@ th {
     background-color: green;
 }
 
+.next-days {
+    color: gray;
+}
+
+.next-days:hover {
+    background-color: rgb(38, 52, 69);
+}
+
 /*month and username at DB*/
-.month, .username {
+.month, .username, .prev-month, .next-month {
     position: fixed;
     top: 40px;
 }
 
 .month {
-    left: 5%;
+    left: 50px;
     font-weight: bold;
     font-size: 20px;
+}
+
+.prev-month, .next-month {
+    font-size: 20px;
+    cursor: pointer;
+    top: 60px;
+    background-color: rgb(64, 80, 99);
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+}
+
+.prev-month:hover, .next-month:hover {
+    background-color: rgb(86, 104, 125);
+}
+
+.prev-month {
+    left: 20px;
+}
+
+.next-month {
+    left: 234px;
 }
 
 .username {
@@ -85,10 +113,12 @@ th {
     width: 700px;
     height: 90%;
     padding: 0px;
-}
 
-.checklist-content-div p {
-    margin: 0;
+    hr {
+        width: 94%;
+        margin: 10px 20px;
+        display: inline-block;
+    }
 }
 
 .task {
@@ -139,7 +169,8 @@ th {
     margin-left: 30px;
 }
 
-.journal-close-button {
+.journal-close-button,
+.close-add-task-button {
     position: absolute;
     right: 0;
     top: 0;
@@ -151,7 +182,8 @@ th {
     border-radius: 5px;
 }
 
-.journal-entry-portion,  .checklist-portion{
+.journal-entry-portion,  
+.checklist-portion {
     align-content: center;
     border: none;
     border-radius: 10px;
@@ -182,9 +214,61 @@ th {
     margin-bottom: 0;
 }
 
-.add-task-clickable:hover {
+.portion-add-task:hover,
+.save-task-button:hover {
     cursor: pointer;
+}
+
+.portion-add-task:hover {
     color:rgb(191, 206, 223);
+}
+
+.save-task-button:hover {
+    background-color: rgb(86, 104, 125);
+}
+
+.add-task-overlay {
+    display: none;
+    position: absolute;
+    width: 250px;
+    height: fit-content;
+    right: 45px;
+    bottom: 45px;
+}
+
+.add-task-div {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    font-size: 12px;
+    background-color: rgb(38, 52, 69);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px white solid;
+
+    p {
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+
+    input {
+        width: 95%;
+        padding: 5px;
+    }
+
+    .date-input {
+        font-family: Arial, Helvetica, sans-serif;
+    }
+}
+
+.save-task-button {
+    width: 70px;
+    background-color: rgb(64, 80, 99);
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    margin-left: auto;
 }
 
 /*the journal entry portion*/
@@ -195,8 +279,11 @@ th {
 
 .checklist-content-div {
     overflow-y: auto;
+    
+    p {
+        margin: 0;
+    }
 }
-
 
 .journal-entry-field {
     width: 99%;
@@ -234,10 +321,10 @@ th {
     z-index: 999;
     padding: 20px;
     display: none;
-}
 
-.account-settings-overlay p {
-    margin: auto;
+    p {
+        margin: auto;
+    }
 }
 
 .user-information {
@@ -254,7 +341,22 @@ th {
     background-color: rgb(64, 80, 99);
 }
 
-/*within shared-elements.css*/
-.button {
-    font-size: 12px;
+.minimal-tasks-completed {
+    background-color: #0B2447;
+    color: white;
+}
+
+.moderate-tasks-completed {
+    background-color: #576CBC;
+    color: rgb(38, 52, 69);
+}
+
+.multiple-tasks-completed {
+    background-color: #576CBC;
+    color: rgb(38, 52, 69);
+}
+
+.quota-reached {
+    background-color: #A5D7E8;
+    color: rgb(38, 52, 69);
 }

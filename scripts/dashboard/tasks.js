@@ -1,8 +1,10 @@
 
-import { getUserTasks } from "../data/user-tasks.js";
-import { getCurrentUser, getUserId } from "../data/user-data.js";
+import { changeDateCompleted, deleteTask, getUserTasks } from "../data/user-tasks.js";
+import { getCurrentUser } from "../data/user-data.js";
+import { isToday, shortFullDate } from "./calendar.js";
+import { getShortDate } from "../utils/dates.js";
 
-export function loadTasksToOverlay(isToday, shortFullDate) {
+export function loadTasksToOverlay() {
     const currentUser = getCurrentUser();
     const userId = currentUser.userId;
 
@@ -11,30 +13,39 @@ export function loadTasksToOverlay(isToday, shortFullDate) {
     
     if(tasks !== undefined){
         tasks.forEach((task) => {
-            if(task.archived === true){
-                return;
-            }
+            const dateCompleted = getShortDate(task.dateCompleted);
 
             if(isToday){
-                if(task.completed === true && shortFullDate != task.dateCompleted){
+                console.log("task description: " + task.taskDescription);
+                console.log("task.completed = " + task.completed);
+                console.log("current date isn't date completed: " + (shortFullDate != dateCompleted));
+
+                if(task.completed === true && shortFullDate != dateCompleted){
                     return;
                 }
 
                 document.querySelector('.js-portion-add-task').classList.add('add-task-clickable');
             } else {
-                if(task.completed === false || shortFullDate != task.dateCompleted){
+                if(task.completed === false || shortFullDate != dateCompleted){
                     return;
                 } 
                 document.querySelector('.js-portion-add-task').classList.remove('add-task-clickable');
             }
 
+            console.log("task " + task.taskDescription + " completed");
             tasksHTML += `
                 <div class="task">
-                    <input class="task-button checkbox-input" type="checkbox" name="checklist" value="checklist" id="1" ${(!isToday) ? 'onclick="return false"': ''} ${(task.completed) ? 'checked' : ''}>
+                    <input
+                    class="task-button checkbox-input js-checkbox-input" 
+                    type="checkbox" 
+                    name="checklist" 
+                    value="checklist" 
+                    id="1" 
+                    ${(!isToday) ? 'disabled': ''} 
+                    ${(task.completed) ? 'checked' : ''}>
                     <p>${task.taskDescription}</p>
                     <p>Deadline: ${task.deadline}</p>
-                    <img class="task-button" src="images/trash-icon.png" width="15px" height="15px">
-                    <img class="task-button" src="images/archive-icon.png" width="15px" height="15px">
+                    <img class="task-button js-delete-button" src="images/trash-icon.png" width="15px" height="15px">
                 </div>
             `;
         });
@@ -48,5 +59,30 @@ export function loadTasksToOverlay(isToday, shortFullDate) {
         `;
     }
     document.querySelector('.js-checklist-content-div').innerHTML = tasksHTML;
+
+    document.querySelectorAll('.js-checkbox-input').forEach((task, index) => {
+        task.addEventListener('change', (e) => {
+            const tasks = getUserTasks(userId);
+            const task = tasks[index];
+
+            console.log("CHANGED THE TASK " + task.taskDescription);
+            changeDateCompleted(userId, task.taskID);
+        });
+    });
+
+    document.querySelectorAll('.js-delete-button').forEach((task, index) => {
+        task.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const tasks = getUserTasks(userId);
+            const task = tasks[index];
+
+            console.log("DELETING TASK");
+            deleteTask(userId, task.taskID);
+        });
+    });
 }
 
+export function toggleAddTasks(show) {
+    document.querySelector('.add-task-overlay')
+    .classList.toggle('display-content', show);
+}

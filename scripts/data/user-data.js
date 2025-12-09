@@ -89,7 +89,7 @@ export function makeID() {
 }
 
 // checks if userID exists
-function userIdExists(userId) {
+export function userIdExists(userId) {
     let doesUserIdExist = false;
     users.forEach((user) => {
         if(userId === user.userId) {

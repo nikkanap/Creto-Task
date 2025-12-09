@@ -186,6 +186,7 @@ function renderDates(date, wordMonth, numMonth, month, wordYear, numYear, year, 
             document.querySelector('.js-journal-date').innerHTML = dateWithWeek;
 
             shortFullDate = getShortDateString(wordMonth, day, wordYear);
+
             loadTasksToOverlay();
             loadJournalLog(currentUser.userId, shortFullDate);
 

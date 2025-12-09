@@ -81,6 +81,8 @@ function addElementEvents() {
     document.querySelector('.js-portion-add-task')
     .addEventListener('click', () => {
         toggleAddTasks(true);
+        document.querySelector('.task-description').value = "";
+        document.querySelector('.date-input').value = "";
     });
 
     document.querySelector('.js-close-add-task-button')
